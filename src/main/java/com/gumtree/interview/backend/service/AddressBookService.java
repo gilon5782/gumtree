@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Duration;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -52,7 +53,16 @@ public class AddressBookService {
         return AddressBookEntryMapper.addressBookEntryToDto(entry);
     }
 
-    public long getAgeDifferenceInDays(Name bill, Name paul) {
-        return 0L;
+    public long getAgeDifferenceInDays(Name p1Name, Name p2Name) {
+        AddressBookEntryDAO first = findByFirstName(p1Name);
+        AddressBookEntryDAO second = findByFirstName(p2Name);
+        return Duration.between(first.getDob().toInstant(), second.getDob().toInstant()).toDays();
+    }
+
+    private AddressBookEntryDAO findByFirstName(Name firstName) {
+        return data.stream()
+                .filter(entry -> entry.getFirstName().getName().equals(firstName.getName())).findFirst()
+                .orElseThrow(() -> new RuntimeException(
+                        "Unable to find a person with first name %s".formatted(firstName.getName())));
     }
 }

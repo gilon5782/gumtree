@@ -6,6 +6,11 @@ import lombok.ToString;
 
 @ToString
 public class AddressBookEntryDTO {
-    @Getter @Setter
-    String name;
+    @Getter
+    @Setter
+    Name firstName;
+
+    @Getter
+    @Setter
+    Name lastName;
 }

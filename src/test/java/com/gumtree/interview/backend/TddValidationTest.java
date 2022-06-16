@@ -36,7 +36,8 @@ public class TddValidationTest {
     @Test
     public void canFindOldestPerson() {
         AddressBookEntryDTO expected = new AddressBookEntryDTO();
-        expected.setName("Wes Jackson");
+        expected.setFirstName(new Name("Wes"));
+        expected.setLastName(new Name("Jackson"));
         Assertions.assertThat(service.getOldestPerson())
                 .as("oldest person")
                 .usingRecursiveComparison()
@@ -47,6 +48,6 @@ public class TddValidationTest {
     public void canCalculateAgeDifferenceInDays() {
         Assertions.assertThat(service.getAgeDifferenceInDays(new Name("Bill"), new Name("Paul")))
                 .as("days between birth of Bill and Paul")
-                .isEqualTo(100);
+                .isEqualTo(2862);
     }
 }

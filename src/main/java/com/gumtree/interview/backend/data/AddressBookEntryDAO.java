@@ -11,7 +11,11 @@ public class AddressBookEntryDAO {
 
     @Getter
     @Setter
-    private String name;
+    private Name firstName;
+
+    @Getter
+    @Setter
+    private Name lastName;
 
     @Getter
     @Setter
@@ -24,7 +28,9 @@ public class AddressBookEntryDAO {
     public static AddressBookEntryDAO fromString(String line) {
         String[] fields = line.split(",");
         AddressBookEntryDAO result = new AddressBookEntryDAO();
-        result.setName(fields[0].trim());
+        String[] names = fields[0].trim().split(" ");
+        result.setFirstName(new Name(names[0]));
+        result.setLastName(new Name(names[1]));
         result.setGender(Gender.byRepr(fields[1].trim()));
         result.setDob(parseDate(fields[2].trim()));
         return result;
