@@ -1,9 +1,6 @@
 package com.gumtree.interview.backend.service;
 
-import com.gumtree.interview.backend.data.AddressBookEntryDAO;
-import com.gumtree.interview.backend.data.AddressBookEntryDTO;
-import com.gumtree.interview.backend.data.AddressBookEntryMapper;
-import com.gumtree.interview.backend.data.Gender;
+import com.gumtree.interview.backend.data.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -53,5 +50,9 @@ public class AddressBookService {
         AddressBookEntryDAO entry = data.stream().min(Comparator.comparing(AddressBookEntryDAO::getDob))
                 .orElseThrow(() -> new RuntimeException("No data"));
         return AddressBookEntryMapper.addressBookEntryToDto(entry);
+    }
+
+    public long getAgeDifferenceInDays(Name bill, Name paul) {
+        return 0L;
     }
 }

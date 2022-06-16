@@ -2,6 +2,7 @@ package com.gumtree.interview.backend;
 
 import com.gumtree.interview.backend.data.AddressBookEntryDTO;
 import com.gumtree.interview.backend.data.Gender;
+import com.gumtree.interview.backend.data.Name;
 import com.gumtree.interview.backend.service.AddressBookService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -40,5 +41,12 @@ public class TddValidationTest {
                 .as("oldest person")
                 .usingRecursiveComparison()
                 .isEqualTo(expected);
+    }
+
+    @Test
+    public void canCalculateAgeDifferenceInDays() {
+        Assertions.assertThat(service.getAgeDifferenceInDays(new Name("Bill"), new Name("Paul")))
+                .as("days between birth of Bill and Paul")
+                .isEqualTo(100);
     }
 }
