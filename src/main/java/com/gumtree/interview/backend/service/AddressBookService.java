@@ -1,6 +1,7 @@
 package com.gumtree.interview.backend.service;
 
 import com.gumtree.interview.backend.data.AddressBookEntryDAO;
+import com.gumtree.interview.backend.data.AddressBookEntryDTO;
 import com.gumtree.interview.backend.data.Gender;
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,5 +45,9 @@ public class AddressBookService {
 
     public long countByGender(Gender gender) {
         return data.stream().filter(entry -> entry.getGender().equals(gender)).count();
+    }
+
+    public AddressBookEntryDTO getOldestPerson() {
+        return null;
     }
 }

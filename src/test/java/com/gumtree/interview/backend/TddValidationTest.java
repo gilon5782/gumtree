@@ -1,5 +1,6 @@
 package com.gumtree.interview.backend;
 
+import com.gumtree.interview.backend.data.AddressBookEntryDTO;
 import com.gumtree.interview.backend.data.Gender;
 import com.gumtree.interview.backend.service.AddressBookService;
 import org.assertj.core.api.Assertions;
@@ -29,5 +30,14 @@ public class TddValidationTest {
         Assertions.assertThat(service.countByGender(Gender.MALE))
                 .as("male count")
                 .isEqualTo(3);
+    }
+
+    @Test
+    public void canFindOldestPerson() {
+        AddressBookEntryDTO expected = new AddressBookEntryDTO();
+        expected.setName("Wes Jackson");
+        Assertions.assertThat(service.getOldestPerson())
+                .as("oldest person")
+                .isEqualTo(expected);
     }
 }
