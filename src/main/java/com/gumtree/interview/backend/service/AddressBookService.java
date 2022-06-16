@@ -1,5 +1,6 @@
 package com.gumtree.interview.backend.service;
 
+import com.gumtree.interview.backend.data.AddressBookEntryDAO;
 import com.gumtree.interview.backend.data.Gender;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,7 +16,7 @@ import java.util.stream.Stream;
 @Slf4j
 public class AddressBookService {
 
-    List<String> data;
+    List<AddressBookEntryDAO> data;
 
     public AddressBookService() throws IOException {
         init();
@@ -28,7 +29,8 @@ public class AddressBookService {
             try (Stream<String> lines = Files.lines(
                     Path.of(Objects.requireNonNull(
                             this.getClass().getResource("/AddressBook")).toURI()))) {
-                data = lines.collect(Collectors.toList());
+                data = lines.map(AddressBookEntryDAO::fromString)
+                        .collect(Collectors.toList());
             }
             log.info("Loaded data");
         } catch (URISyntaxException e) {
@@ -41,6 +43,6 @@ public class AddressBookService {
     }
 
     public long countByGender(Gender gender) {
-        return 0;
+        return data.stream().filter(entry -> entry.getGender().equals(gender)).count();
     }
 }
