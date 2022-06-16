@@ -38,6 +38,7 @@ public class TddValidationTest {
         expected.setName("Wes Jackson");
         Assertions.assertThat(service.getOldestPerson())
                 .as("oldest person")
+                .usingRecursiveComparison()
                 .isEqualTo(expected);
     }
 }

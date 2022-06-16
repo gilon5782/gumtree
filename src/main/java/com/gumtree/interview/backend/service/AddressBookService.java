@@ -2,6 +2,7 @@ package com.gumtree.interview.backend.service;
 
 import com.gumtree.interview.backend.data.AddressBookEntryDAO;
 import com.gumtree.interview.backend.data.AddressBookEntryDTO;
+import com.gumtree.interview.backend.data.AddressBookEntryMapper;
 import com.gumtree.interview.backend.data.Gender;
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -48,6 +50,8 @@ public class AddressBookService {
     }
 
     public AddressBookEntryDTO getOldestPerson() {
-        return null;
+        AddressBookEntryDAO entry = data.stream().min(Comparator.comparing(AddressBookEntryDAO::getDob))
+                .orElseThrow(() -> new RuntimeException("No data"));
+        return AddressBookEntryMapper.addressBookEntryToDto(entry);
     }
 }
