@@ -1,5 +1,6 @@
 package com.gumtree.interview.backend;
 
+import com.gumtree.interview.backend.data.Gender;
 import com.gumtree.interview.backend.service.AddressBookService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -21,5 +22,12 @@ public class TddValidationTest {
                 .assertThat(service.getEntriesCount())
                 .as("total number of entries")
                 .isGreaterThan(0);
+    }
+
+    @Test
+    public void canDifferentiateGender() {
+        Assertions.assertThat(service.countByGender(Gender.MALE))
+                .as("male count")
+                .isEqualTo(3);
     }
 }

@@ -1,5 +1,6 @@
 package com.gumtree.interview.backend.service;
 
+import com.gumtree.interview.backend.data.Gender;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -37,5 +38,9 @@ public class AddressBookService {
 
     public long getEntriesCount() {
         return data.size();
+    }
+
+    public long countByGender(Gender gender) {
+        return 0;
     }
 }
