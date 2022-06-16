@@ -2,10 +2,18 @@ package com.gumtree.interview.backend;
 
 import com.gumtree.interview.backend.service.AddressBookService;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 public class TddValidationTest {
-    AddressBookService service = new AddressBookService();
+    static AddressBookService service;
+
+    @BeforeAll
+    public static void init() throws IOException {
+        service = new AddressBookService();
+    }
 
     @Test
     public void canReadDbFile() {
